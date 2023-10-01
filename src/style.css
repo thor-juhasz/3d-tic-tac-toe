@@ -3,14 +3,8 @@
 @tailwind utilities;
 
 :root {
-  @apply bg-slate-300 dark:bg-slate-900;
-  /*font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;*/
-
+  @apply bg-slate-200 dark:bg-slate-900;
   color-scheme: light dark;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 body {

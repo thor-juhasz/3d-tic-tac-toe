@@ -7,9 +7,9 @@
 
 <style scoped>
 svg {
-    @apply fill-sky-300 dark:fill-sky-500;
+    @apply fill-blue-500 dark:fill-sky-500;
 }
 svg.highlight {
-    @apply fill-sky-400 dark:fill-sky-600;
+    @apply fill-blue-700 dark:fill-sky-600;
 }
 </style>

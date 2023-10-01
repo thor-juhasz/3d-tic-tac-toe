@@ -168,7 +168,7 @@ function resetGame(): void {
     left: -5%;
     width: 110%;
     height: 110%;
-    @apply bg-slate-300 dark:bg-slate-900;
+    @apply bg-slate-200 dark:bg-slate-900;
     opacity: 0;
     pointer-events: none;
     transition: opacity ease-in .4s;

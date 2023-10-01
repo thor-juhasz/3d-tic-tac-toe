@@ -7,9 +7,9 @@
 
 <style scoped>
 svg {
-    @apply fill-red-800 dark:fill-red-500;
+    @apply fill-rose-600 dark:fill-red-500;
 }
 svg.highlight {
-    @apply fill-red-400 dark:fill-red-600;
+    @apply fill-rose-700 dark:fill-red-600;
 }
 </style>

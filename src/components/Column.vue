@@ -49,26 +49,15 @@ function isColumnAvailable(): boolean {
 
 <style scoped>
 button {
-    @apply bg-gray-400 dark:bg-gray-600;
+    @apply bg-slate-400/40 dark:bg-gray-600;
 }
 button:not([disabled]) {
-    @apply transition-colors duration-300 hover:bg-gray-300 dark:hover:bg-gray-500;
+    @apply transition-colors duration-300 hover:bg-slate-400/80 dark:hover:bg-gray-500;
 }
 button.highlight {
-    @apply bg-gray-200 dark:bg-gray-400;
+    @apply bg-slate-500/80 dark:bg-gray-400;
 }
 button[disabled] {
-    @apply opacity-50;
+    @apply opacity-90 dark:opacity-90;
 }
-
-.playerX.highlight:not([disabled]):deep(svg) {
-    @apply fill-red-400 dark:fill-red-600;
-}
-.playerO.highlight:not([disabled]):deep(svg) {
-    @apply fill-blue-400 dark:fill-blue-600;
-}
-.no-player :deep(svg) {
-    @apply fill-emerald-400 dark:fill-emerald-600;
-}
-
 </style>
