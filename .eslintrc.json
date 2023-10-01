@@ -1,0 +1,121 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es2022": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:vue/vue3-recommended",
+        "@vue/typescript/recommended"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "ecmaVersion": 2022,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "vue",
+        "@typescript-eslint"
+    ],
+    "ignorePatterns": [
+        "dist/*",
+        "node_modules/*"
+    ],
+    "rules": {
+        // Core
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1,
+                "VariableDeclarator": "first"
+            }
+        ],
+        "eqeqeq": "warn",
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon": false,
+                "afterColon": true,
+                "align": "value",
+                "mode": "minimum"
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "no-extra-semi": "warn",
+        "no-multi-spaces": [
+            "error",
+            {
+                "exceptions": {
+                    "ImportDeclaration": true,
+                    "Property": true,
+                    "VariableDeclarator": true,
+                    "AssignmentExpression": true
+                }
+            }
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+
+        // TypeScript
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+
+        // Vue
+        "vue/attributes-order": "off",
+        "vue/first-attribute-linebreak": [
+            "error",
+            {
+                "singleline": "ignore",
+                "multiline": "beside"
+            }
+        ],
+        "vue/html-closing-bracket-newline": "off",
+        "vue/html-indent": [
+            "error",
+            4,
+            {
+                "attribute": 1,
+                "baseIndent": 1,
+                "closeBracket": 0,
+                "alignAttributesVertically": true,
+                "ignores": []
+            }
+        ],
+        "vue/max-attributes-per-line": "off",
+        "vue/multi-word-component-names": "off",
+        "vue/no-v-html": "off",
+        "vue/singleline-html-element-content-newline": "off"
+    },
+    "overrides": [
+        {
+            "files": [
+                "*.vue"
+            ],
+            "rules": {
+                "@typescript-eslint/no-unused-vars": "off"
+            }
+        }
+    ]
+}
