@@ -5,10 +5,10 @@
             @mouseover="columnMouseOver()"
             @mouseout="columnMouseOut()">
         <template v-if="player === 'X'">
-            <XIcon class="m-2.5 w-full h-full" :class="{ highlight }" />
+            <XIcon class="m-1.5 md:m-2.5 w-full h-full" :class="{ highlight }" />
         </template>
         <template v-else-if="player === 'O'">
-            <OIcon class="m-1.5 w-full h-full" :class="{ highlight }" />
+            <OIcon class="m-1 md:m-1.5 w-full h-full" :class="{ highlight }" />
         </template>
     </button>
 </template>

@@ -2,7 +2,7 @@
     <template v-if="gameData.winner">
         <!--<div class="text-3xl" v-html="winner" />-->
         <div class="grid gap-2">
-            <Column class="w-40 h-40 rounded-lg flex justify-center items-center"
+            <Column class="w-20 h-20 md:w-40 md:h-40 rounded-lg flex justify-center items-center"
                     :player="gameData.winner"
                     :highlight="false"
                     :disabled="true" />
@@ -10,7 +10,7 @@
     </template>
     <template v-else>
         <div class="grid grid-cols-3 grid-rows-3 gap-2" :class="[gameData.highlight && 'highlight', hasNextMove && 'next-move']">
-            <Column class="w-12 h-12 rounded-lg flex justify-center items-center"
+            <Column class="w-6 h-6 md:w-12 md:h-12 rounded-lg flex justify-center items-center"
                     v-for="(column, index) in gameData.columns"
                     :key="index"
                     :player="column"
@@ -57,7 +57,7 @@ function isColumnAvailable(column: Values): boolean {
 
 <style scoped>
 div {
-    @apply p-3 rounded-lg border border-transparent transition-transform duration-300;
+    @apply p-1 md:p-3 rounded-lg border border-transparent transition-transform duration-300;
 }
 div.highlight {
     @apply scale-105;

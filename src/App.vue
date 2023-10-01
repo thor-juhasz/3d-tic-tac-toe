@@ -23,7 +23,7 @@
             <Button class="mt-8" @click="resetGame()">Restart game</Button>
         </div>
 
-        <div class="victory flex flex-col flex-wrap flex-initial justify-center items-center" :class="[gameOver && 'show']">
+        <div class="victory flex flex-col flex-initial justify-center items-center" :class="[gameOver && 'show']">
             <p>Game winner</p>
 
             <div class="flex justify-center">

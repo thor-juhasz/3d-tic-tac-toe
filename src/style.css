@@ -15,10 +15,9 @@
 
 body {
   @apply flex justify-center;
-  min-width: 320px;
   min-height: 100vh;
 }
 
 #app {
-  @apply p-8 text-center;
+  @apply md:p-8 text-center;
 }
