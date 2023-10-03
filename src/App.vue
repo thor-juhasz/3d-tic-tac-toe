@@ -21,12 +21,10 @@
 import Header from '@/components/Header.vue'
 import HowToPlay from '@/components/HowToPlay.vue'
 import { onBeforeMount, ref } from 'vue'
-
 import Game from '@/components/Game.vue'
 import GameOver from '@/components/GameOver.vue'
 import { getWinner, remainingColumns } from '@/helper.ts'
 import { GameColumns, GameData, Player, Values } from '@/types.ts'
-import { ref } from 'vue'
 
 const defaultGameData: GameData = {
     columns:   [null, null, null, null, null, null, null, null, null],
@@ -112,7 +110,7 @@ function checkMainGameWinner(): void {
 
     let finishedGames = 0
     games.value.forEach((game, index) => {
-        if (game.winner || remainingColumns(index, 0, game.columns) <= 0) {
+        if (game.winner || remainingColumns(index as Values, 0, game.columns) <= 0) {
             finishedGames++
         }
     })

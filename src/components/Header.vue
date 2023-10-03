@@ -66,12 +66,12 @@
         </div>
     </header>
 </template>
+
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import Button from '@/components/Button.vue'
 import { computed, onBeforeMount, ref } from 'vue'
 import GitHub from '@/assets/github.svg'
-import HeaderLogo from '@/assets/header-logo.svg'
 import Logo from '@/assets/logo2.svg'
 import Moon from '@/assets/moon.svg'
 import Sun from '@/assets/sun.svg'

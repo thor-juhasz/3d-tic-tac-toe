@@ -30,8 +30,12 @@ export function getWinner(gameColumns: GameColumns): Player {
 }
 
 export function remainingColumns(currentGame: Values, targetGame: Values, gameColumns: GameColumns): number {
-    return gameColumns.reduce(
-        (previousValue, currentValue) => previousValue - (currentValue !== null ? 1 : 0),
-        gameColumns.length,
-    ) - (currentGame === targetGame ? 1 : 0)
+    let columns = 0
+    gameColumns.forEach(column => {
+        if (column === null) {
+            columns++
+        }
+    })
+
+    return columns - (currentGame === targetGame ? 1 : 0)
 }

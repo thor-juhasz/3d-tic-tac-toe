@@ -51,9 +51,6 @@
 <script setup lang="ts">
 import HeaderLogo from '@/assets/header-logo.svg'
 import Button from '@/components/Button.vue'
-import OIcon from '@/components/icons/OIcon.vue'
-import XIcon from '@/components/icons/XIcon.vue'
-import { Player } from '@/types.ts'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 defineProps<{
