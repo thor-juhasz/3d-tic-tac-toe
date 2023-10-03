@@ -1,54 +1,30 @@
 <template>
-    <div class="container">
-        <div class="game flex flex-col flex-wrap flex-initial justify-center items-center">
-            <p class="text-center text-2xl p-4">
-                Current move:
-                <template v-if="playerTurn === 'X'">
-                    <XIcon class="inline" />
-                </template>
-                <template v-else>
-                    <OIcon class="inline" />
-                </template>
-            </p>
-            <div class="grid grid-cols-3 grid-rows-3 gap-2">
-                <TicTacToe v-for="(game, index) in games"
-                           :key="index"
-                           :game-data="game"
-                           :has-next-move="nextGameMove === index || nextGameMove === undefined"
-                           @column-click="(column: Values) => columnClick(index as Values, column)"
-                           @column-mouseover="(column: Values) => columnMouseOver(index as Values, column)"
-                           @column-mouseout="columnMouseOut()" />
-            </div>
+    <Header @show-help="showHelp = true" />
 
-            <Button class="mt-8" @click="resetGame()">Restart game</Button>
-        </div>
+    <Game :games="games"
+          :player-turn="playerTurn"
+          :next-game-move="nextGameMove"
+          @column-click="(game, column) => columnClick(game as Values, column as Values)"
+          @column-mouseover="(game, column) => columnMouseOver(game as Values, column as Values)"
+          @column-mouseout="columnMouseOut()"
+          @reset-game="resetGame()" />
 
-        <div class="victory flex flex-col flex-initial justify-center items-center" :class="[gameOver && 'show']">
-            <p>Game winner</p>
+    <GameOver :open="gameOver" :winner="mainGameWinner" @close="resetGame()" />
+    <HowToPlay :open="showHelp" @close="showHelp = false" />
 
-            <div class="flex justify-center">
-                <template v-if="playerTurn === 'X'">
-                    <XIcon class="m-2.5 w-96 h-96" />
-                </template>
-                <template v-else>
-                    <OIcon class="m-2.5 w-96 h-96" />
-                </template>
-            </div>
-
-            <Button @click="resetGame()">Restart game</Button>
-
-            <Fireworks />
-        </div>
-    </div>
+    <footer class="text-center mt-8">
+        "3D" Tic-Tac-Toe &mdash; &copy; Thor Juhasz 2023
+    </footer>
 </template>
 
 <script setup lang="ts">
-import Button from '@/components/Button.vue'
-import Fireworks from '@/components/Fireworks.vue'
-import OIcon from '@/components/OIcon.vue'
-import TicTacToe from '@/components/TicTacToe.vue'
-import XIcon from '@/components/XIcon.vue'
-import { getWinner } from '@/helper.ts'
+import Header from '@/components/Header.vue'
+import HowToPlay from '@/components/HowToPlay.vue'
+import { onBeforeMount, ref } from 'vue'
+
+import Game from '@/components/Game.vue'
+import GameOver from '@/components/GameOver.vue'
+import { getWinner, remainingColumns } from '@/helper.ts'
 import { GameColumns, GameData, Player, Values } from '@/types.ts'
 import { ref } from 'vue'
 
@@ -74,6 +50,16 @@ const playerTurn     = ref<Exclude<Player, null>>('X')
 const nextGameMove   = ref<Values | undefined>(undefined)
 const gameOver       = ref<boolean>(false)
 const mainGameWinner = ref<Player>(null)
+const showHelp       = ref<boolean>(false)
+
+onBeforeMount(() => {
+    const osPrefersDark = !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (osPrefersDark || localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark')
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+})
 
 function columnClick(game: Values, column: Values): void {
     games.value[game].columns[column] = playerTurn.value
@@ -82,21 +68,18 @@ function columnClick(game: Values, column: Values): void {
     playerTurn.value = playerTurn.value === 'X' ? 'O' : 'X'
 
     const targetGameWinner = games.value[column].winner
-    if (targetGameWinner !== null) {
-        highlightAllUnfinishedGames()
-        checkMainGameWinner()
-
-        return
+    if (targetGameWinner !== null || remainingColumns(game, column, games.value[column].columns) <= 0) {
+        nextGameMove.value = undefined
+    } else {
+        nextGameMove.value = column
     }
 
-    nextGameMove.value = column
     unhighlightAllGames()
-
     checkMainGameWinner()
 }
 
 function columnMouseOver(game: Values, column: Values): void {
-    if (games.value[column].winner) {
+    if (games.value[column].winner || remainingColumns(game, column, games.value[column].columns) <= 1) {
         games.value.forEach((gameData, index) => {
             gameData.highlight = index === game || !gameData.winner
         })
@@ -110,16 +93,9 @@ function columnMouseOut(): void {
     unhighlightAllGames()
 }
 
-function highlightAllUnfinishedGames(): void {
-    nextGameMove.value = undefined
-    games.value.forEach(game => {
-        game.highlight = !game.winner
-    })
-}
-
 function unhighlightAllGames(): void {
-    games.value.forEach((game, index) => {
-        game.highlight = nextGameMove.value === undefined || index === nextGameMove.value
+    games.value.forEach((game/*, index*/) => {
+        game.highlight = false
     })
 }
 
@@ -131,6 +107,19 @@ function checkMainGameWinner(): void {
     if (winner) {
         gameOver.value = true
         mainGameWinner.value = winner
+        return
+    }
+
+    let finishedGames = 0
+    games.value.forEach((game, index) => {
+        if (game.winner || remainingColumns(index, 0, game.columns) <= 0) {
+            finishedGames++
+        }
+    })
+
+    // No winner is possible!
+    if (finishedGames === 9) {
+        gameOver.value = true
     }
 }
 
@@ -154,30 +143,3 @@ function resetGame(): void {
     mainGameWinner.value = null
 }
 </script>
-
-<style scoped>
-.container {
-    position: relative;
-}
-.game {
-    position: relative;
-}
-.victory {
-    position: absolute;
-    top: -5%;
-    left: -5%;
-    width: 110%;
-    height: 110%;
-    @apply bg-slate-200 dark:bg-slate-900;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity ease-in .4s;
-}
-.victory.show {
-    opacity: 1;
-    pointer-events: auto;
-}
-.victory p {
-    @apply text-6xl;
-}
-</style>

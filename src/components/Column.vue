@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import OIcon from '@/components/OIcon.vue'
-import XIcon from '@/components/XIcon.vue'
+import OIcon from '@/components/icons/OIcon.vue'
+import XIcon from '@/components/icons/XIcon.vue'
 import { Player } from '@/types.ts'
 
 const props = defineProps<{

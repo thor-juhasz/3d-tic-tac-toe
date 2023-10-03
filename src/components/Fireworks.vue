@@ -5,12 +5,6 @@
     </div>
 </template>
 
-<style>
-body {
-    overflow: hidden;
-}
-</style>
-
 <style scoped>
 .pyro {
     position: absolute;

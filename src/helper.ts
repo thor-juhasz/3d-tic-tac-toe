@@ -1,4 +1,4 @@
-import { GameColumns, Player } from '@/types.ts'
+import { GameColumns, Player, Values } from '@/types.ts'
 
 export function getWinner(gameColumns: GameColumns): Player {
     // Define winning combinations as arrays of indices
@@ -27,4 +27,11 @@ export function getWinner(gameColumns: GameColumns): Player {
 
     // If no winner is found
     return null
+}
+
+export function remainingColumns(currentGame: Values, targetGame: Values, gameColumns: GameColumns): number {
+    return gameColumns.reduce(
+        (previousValue, currentValue) => previousValue - (currentValue !== null ? 1 : 0),
+        gameColumns.length,
+    ) - (currentGame === targetGame ? 1 : 0)
 }
