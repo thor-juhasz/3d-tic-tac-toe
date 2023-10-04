@@ -4,7 +4,7 @@
             <Logo height="100%" />
             <div class="flex flex-col text-center ml-4 my-2">
                 <h3 class="text-emerald-400 m-0">"3D" Tic-Tac-Toe</h3>
-                <p class="text-emerald-400 m-0">A nester game of Tic-Tac-Toe<br>written in VueJS</p>
+                <p class="text-emerald-400 m-0">A nested game of Tic-Tac-Toe<br>written in VueJS</p>
             </div>
         </div>
         <div class="flex justify-center items-center gap-4">
