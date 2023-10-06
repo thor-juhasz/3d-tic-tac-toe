@@ -13,6 +13,7 @@
             <TicTacToe v-for="(game, index) in games"
                        :key="index"
                        :game-data="game"
+                       :game-number="index + 1"
                        :has-next-move="nextGameMove === index || nextGameMove === undefined"
                        @column-click="(column: Values) => columnClick(index as Values, column)"
                        @column-mouseover="(column: Values) => columnMouseOver(index as Values, column)"

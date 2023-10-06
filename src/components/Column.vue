@@ -1,5 +1,6 @@
 <template>
     <button :class="{ playerX: player === 'X', playerO: player === 'O', 'no-player': !player, highlight }"
+            :aria-label="columnLabel"
             :disabled="disabled"
             @click="columnClick()"
             @mouseover="columnMouseOver()"
@@ -14,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import OIcon from '@/components/icons/OIcon.vue'
 import XIcon from '@/components/icons/XIcon.vue'
 import { Player } from '@/types.ts'
@@ -22,6 +24,8 @@ const props = defineProps<{
     player: Player;
     highlight: boolean;
     disabled: boolean;
+    gameNumber: number;
+    columnNumber: number;
 }>()
 
 const emit = defineEmits<{
@@ -29,6 +33,10 @@ const emit = defineEmits<{
     (e: 'column-mouseover'): void
     (e: 'column-mouseout'): void
 }>()
+
+const columnLabel = computed(() => {
+    return `Game ${props.gameNumber}, Column ${props.columnNumber}`
+})
 
 function columnClick(): void {
     isColumnAvailable() && emit('column-click')

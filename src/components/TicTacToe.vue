@@ -5,7 +5,9 @@
             <Column class="w-20 h-20 md:w-40 md:h-40 rounded-lg flex justify-center items-center"
                     :player="gameData.winner"
                     :highlight="false"
-                    :disabled="true" />
+                    :disabled="true"
+                    :game-number="gameNumber"
+                    :column-number="1" />
         </div>
     </template>
     <template v-else>
@@ -16,6 +18,8 @@
                     :player="column"
                     :highlight="hasNextMove || gameData.highlight"
                     :disabled="column !== null || !hasNextMove"
+                    :game-number="gameNumber"
+                    :column-number="index + 1"
                     @column-click="columnClick(index as Values)"
                     @column-mouseover="columnMouseOver(index as Values)"
                     @column-mouseout="columnMouseOut(index as Values)" />
@@ -30,6 +34,7 @@ import { GameData, Values } from '@/types.ts'
 const props = defineProps<{
     gameData: GameData;
     hasNextMove: boolean;
+    gameNumber: number;
 }>()
 
 const emit = defineEmits<{
