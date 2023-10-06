@@ -10,7 +10,7 @@
         <div class="flex justify-center items-center gap-4">
             <Button class="!text-sm whitespace-nowrap" @click="showHelp()">How to play?</Button>
             <a class="text-sky-600 dark:test-sky-400 no-underline hover:underline" href="https://github.com/thor-juhasz/3d-tic-tac-toe/issues" target="_blank">Found an issue?</a>
-            <a class="" href="https://github.com/thor-juhasz/3d-tic-tac-toe" target="_blank">
+            <a href="https://github.com/thor-juhasz/3d-tic-tac-toe" target="_blank" aria-label="GitHub repository">
                 <GitHub class="transition-colors fill-slate-400 hover:fill-slate-200" />
             </a>
             <Menu as="div" class="relative ml-3">
